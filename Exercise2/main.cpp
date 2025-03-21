@@ -8,9 +8,6 @@
 #include <iomanip>
 
 using namespace std;
-//ios_base& scientific (std::ios_base& str);
-//tr.setf(std::ios_base::scientific, std::ios_base::floatfield);
-
 
 int main()
 {
