@@ -1,2 +1,1 @@
-"# pcs2025" 
-"# pcs2025" 
+esercitazione 1 
