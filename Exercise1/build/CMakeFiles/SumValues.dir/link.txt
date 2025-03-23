@@ -1,0 +1,1 @@
+/usr/bin/g++ CMakeFiles/SumValues.dir/main.cpp.o -o SumValues  /usr/local/lib/libgtest.a /usr/local/lib/libgtest_main.a /usr/local/lib/libgmock.a /usr/local/lib/libgmock_main.a /usr/local/lib/libgmock.a /usr/local/lib/libgtest.a 

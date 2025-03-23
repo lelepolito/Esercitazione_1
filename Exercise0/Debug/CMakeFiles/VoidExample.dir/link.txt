@@ -1,0 +1,1 @@
+/usr/bin/g++ -g -Wall -Wextra -pedantic-errors CMakeFiles/VoidExample.dir/main.cpp.o -o VoidExample  /usr/local/lib/libgtest.a /usr/local/lib/libgtest_main.a /usr/local/lib/libgmock.a /usr/local/lib/libgmock_main.a /usr/local/lib/libgmock.a /usr/local/lib/libgtest.a 
