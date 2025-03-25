@@ -34,7 +34,7 @@ public :
     F imm(){
         return(p_i);
     }
-    c_num   operator*(c_num const& num2){
+    c_num operator*(c_num const& num2){
         c_num out ;
         out.p_i = p_r * num2.p_i + num2.p_r * p_i;    
         out.p_r = p_r * num2.p_r - p_i * num2.p_i;
@@ -46,16 +46,19 @@ public :
         out.p_r = p_r + num2.p_r;
         return out;
     }
-    void operator+=(c_num const& num2){
+    c_num operator+=(c_num const& num2){
         p_i = p_i + num2.p_i;
         p_r = p_r + num2.p_r;
+        return *this; 
     }
-    void operator*=(c_num const& num2){
+    c_num operator*=(c_num const& num2){
         p_i = p_r * num2.p_i + num2.p_r * p_i;    
-        p_r = p_r * num2.p_r - p_i * num2.p_i;   
+        p_r = p_r * num2.p_r - p_i * num2.p_i;
+        return *this;   
     }
-    void operator+=(F num2){
+    c_num operator+=(F num2){
         p_r = p_r + num2;
+        return *this;
     }
     c_num operator+(F const& num2){
         c_num out;
@@ -63,69 +66,54 @@ public :
         out.p_r = p_r + num2;
         return out;
     }
-    template<typename T> requires FoD<T>
-    friend std::ostream& operator<<(std::ostream& os,const c_num<T>& num);
-    
-    template<typename T> requires FoD<T>
-    friend c_num<T> operator+(T const& num2,c_num<T> const& num1);
-    
-    template<typename T> requires FoD<T>
-    friend c_num<T> operator*(T const& num2,c_num<T> const& num1);
-    
-    template<typename T> requires FoD<T>
-    friend c_num<T> operator*(c_num<T> const& num1,T const& num2);
+    c_num operator*(F const& num2){
+        c_num out;
+        out.p_i = p_i * num2;
+        out.p_r = p_r * num2;
+        return out;
+    }
+
+
+
+
 };
 
-
-
-
 template<typename F> requires FoD<F>
-std::ostream& operator<<(std::ostream& os,const c_num<F>& num) {
-    if (num.p_i < 0)
-        os << num.p_r << num.p_i<< "i";
-    else if(num.p_i == 0)
-        os << num.p_r;   
+std::ostream& operator<<(std::ostream& os,c_num<F>& num) {
+    if (num.imm() < 0)
+        os << num.real() << num.imm()<< "i";
+    else if(num.imm() == 0)
+        os << num.real();   
     else 
-        os << num.p_r << "+" << num.p_i<< "i";
+        os << num.real() << "+" << num.imm()<< "i";
     return os;
-};
-
-
-template<typename F> requires FoD<F>
-c_num<F> operator+(F const& num2,c_num<F> const& num1){
-    c_num<F> out;
-    out.p_i = num1.p_i;
-    out.p_r = num1.p_r + num2;
-    return out;
 }
 
-
 template<typename F> requires FoD<F>
-c_num<F> operator*(c_num<F> const& num1,F const& num2){
-    c_num<F> out;
-    out.p_i = num1.p_i * num2;
-    out.p_r = num1.p_r * num2;
-    return out;
+c_num<F> operator+(F const& num2,c_num<F>& num1){
+    F temp1 = num1.imm();
+    F temp = num1.real();
+    temp += num2;
+    return c_num<F>(temp,temp1);
 }
 
-
 template<typename F> requires FoD<F>
-c_num<F> operator*(F const& num2,c_num<F> const& num1){
-    c_num<F> out;
-    out.p_i = num1.p_i * num2;
-    out.p_r = num1.p_r * num2;
-    return out;
+c_num<F> operator*(F const& num2,c_num<F>& num1){
+    F temp1 = num1.imm();
+    F temp = num1.real();
+    temp *= num2;
+    temp1 *= num2;
+    return c_num<F>(temp,temp1);
 }
-
 
 
 
 int main(){
-    std::cout << "Alcuni test per provare il codice" << std::endl;
-    c_num<float> f(2536.3435,-376.3623);
-    c_num<float> f2(4352.41245,1415.3253);
+    std::cout << "Alcuni test per provare il codice " << std::endl;
+    c_num<float> f(1,-1);
+    c_num<float> f2(2,2);
     c_num<float> f3 = f + f2;
-    c_num<double> f5(2536.3435,-376.3623);
+    c_num<double> f5(3,-3);
     c_num<float> f9;
     c_num<float> f6= f.coniugate();
     c_num<float> f4 = f * f2;
