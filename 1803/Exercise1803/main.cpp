@@ -1,4 +1,4 @@
-#include <ostream>
+
 #include <concepts>
 #include <iostream>
 #include <type_traits>
@@ -25,8 +25,10 @@ public :
         p_i = i ;
     }
     c_num coniugate(){
-        p_i = -p_i;
-        return c_num(p_r, p_i);
+        c_num out;
+        out.p_r = p_r; 
+        out.p_i = -p_i;
+        return out;
     }
     F real(){
         return(p_r);
@@ -52,8 +54,9 @@ public :
         return *this; 
     }
     c_num operator*=(c_num const& num2){
+        F temp = p_i; 
         p_i = p_r * num2.p_i + num2.p_r * p_i;    
-        p_r = p_r * num2.p_r - p_i * num2.p_i;
+        p_r = p_r * num2.p_r - temp * num2.p_i;
         return *this;   
     }
     c_num operator+=(F num2){
@@ -122,24 +125,24 @@ int main(){
     c_num<float> f12 = 50.0f + f;
     float f8= f.imm();
     float f7= f.real();
-    std::cout << f5 << std::endl;
-    std::cout << f3 << std::endl;
-    std::cout << f4 << std::endl;
-    std::cout << f << std::endl; 
-    std::cout << f6 << std::endl;
-    std::cout << f7 << std::endl;
+    std::cout << " Double 3,3  "<<f5 << std::endl;
+    std::cout << " Somma con + fra complex 1,1 + 2,2  "<<f3 << std::endl;
+    std::cout << "Moltpicazione con * fra complex 1,1 * 2,2  "<<f4 << std::endl;
+    std::cout << "Float  1,-1 "<<f << std::endl; 
+    std::cout << "Coniugato 1,-1  "<<f6 << std::endl;
+    std::cout << "Reale 1,-1 "<<f7 << std::endl;
     f9 = f + 5.0f;
-    std::cout << f12<< std::endl;    
-    std::cout << f9 << std::endl;  
+    std::cout << "Somma con  +  con un float prima 50 + 1,-1 "<<f12<< std::endl;    
+    std::cout << "Somma con  +  con un float dopo 1,-1 + 5 "<<f9 << std::endl;  
  
 
-    std::cout << f8 << std::endl;
-    std::cout << f10 << std::endl;
-    std::cout << f11 << std::endl;
+    std::cout << "Immaginaria 1,-1 "<< f8 << std::endl;
+    std::cout << "Moltiplicazione con * con un Double prima 5* 3,-3  "<<f10 << std::endl;
+    std::cout << "Moltiplicazione con * con un float dopo 50* 1,-1  "<<f11 << std::endl;
 
     f += f2;
-    std::cout << f << std::endl;
+    std::cout <<"Somma con += 1,-1 + 2,2 " << f << std::endl;
     f *= f2;
-    std::cout << f << std::endl;
+    std::cout <<"Moltiplicazione con *= 3,1 * 2,2  "<< f << std::endl;
     return 0;
 };
