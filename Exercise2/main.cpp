@@ -1,11 +1,9 @@
-#include <iostream>
-#include <sstream>
+#include <iomanip>
 #include <fstream>
 #include <string>
-#include <ostream>
 #include <vector>
 #include <numeric>
-#include <iomanip>
+
 
 using namespace std;
 
@@ -13,18 +11,16 @@ int main()
 {
     string file_name = "data.txt";
     
-    float i = 0;
-    vector<float> l = {};
-    vector<float> mean = {};
+    double i = 0;
+    vector<double> l = {};
+    vector<double> mean = {};
     ifstream file(file_name);
     if ( file.is_open() ) {
         string line;
         while ( getline(file, line) ) {
-          
-            
-            i = stof(line)*0.75 - 1.75;
+ 
+            i = stod(line)*0.75 - 1.75;
             l.push_back(i);
-            cout << scientific << setprecision(16) << i << endl;
 
         }
         file.close();
