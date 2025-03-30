@@ -1,3 +1,0 @@
-/home/appuser/Data/exercise2/CMakeFiles/MeanValue.dir
-/home/appuser/Data/exercise2/CMakeFiles/edit_cache.dir
-/home/appuser/Data/exercise2/CMakeFiles/rebuild_cache.dir
